@@ -1,0 +1,30 @@
+ 
+version: '3'
+
+services:
+  vpn_mgmt_dns:
+    image: ssh-vpn:v3
+    container_name: ssh-vpn
+    restart: always
+    #ports:
+    #  - 5380:8080
+      #- '60201:53/udp'
+    environment:
+      - ROOTPASS=shithappens
+    volumes:
+      - ./sshd_config:/etc/ssh/sshd_config
+      - ./interfaces:/etc/network/interfaces
+      - ./users:/appdata/users
+    networks:
+      net_ssh_vpn:
+        ipv4_address: 10.253.9.2
+    cap_add:
+      - NET_ADMIN
+
+networks:
+  net_ssh_vpn:
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.253.9.0/29
