@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+description=""
+supervisor="supervise-daemon"
+command="ssh"
+command_args="-i /appdata/key example_user_0@10.253.9.2"
+command_user="root"
+respawn_delay = 10
+respawn_max = 0
+depend() {
+	after net
+}

@@ -3,8 +3,9 @@
 ### Introduction
 
 SSH-VPN is a project of stand-alone SSH server with proper configuration so to allow tunneling in L3, using only SSH ports.
-It utilizes non-so-well-known functionality provided by OpenSSH, that allows remote users to establish not only port forwarding (-L)
-but also whole interface (in L3 or even in L2) tunneling(-w). This tool is docker image - designed to be the most lightweight - so uses Alpine Linux.
+It utilizes non-so-well-known functionality provided by OpenSSH, that allows remote users to establish not only port forwarding (-L) but also whole interface (in L3 or even in L2) tunneling(-w). This tool is docker image - designed to be the most lightweight - so uses Alpine Linux.
+
+For the project, there are also attached client scripts, as well as docker image example
 
 ### How does it work?
 
@@ -17,7 +18,7 @@ In the SSH-VPN container, one OpenSSH server is run. When container starts, all 
 
 Then do proper configuration:
 - run **generate_ssh_key_user.sh** inside the *example/scripts* to create public/private SSH key pair for each user
-- run **generate_ssh_key_user.sh** inside the *example/scripts* to create host keys for SSH server
+- run **generate_ssh_key_host.sh** inside the *example/scripts* to create host keys for SSH server
 - run **docker-compose up** inside the *example* directory
 
 in file **users**, You can define username, password, interface name(without prefix tun), and IP address(of gateway) per each interface.
