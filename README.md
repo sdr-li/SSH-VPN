@@ -14,6 +14,7 @@ In the SSH-VPN container, one OpenSSH server is run. When container starts, all 
 
 
 - build project, using attached **build.sh**
+
 Then do proper configuration:
 - run **generate_ssh_key_user.sh** inside the *example/scripts* to create public/private SSH key pair for each user
 - run **generate_ssh_key_user.sh** inside the *example/scripts* to create host keys for SSH server
