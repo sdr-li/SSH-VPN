@@ -12,9 +12,11 @@ services:
     environment:
       - ROOTPASS=shithappens
     volumes:
-      - ./sshd_config:/etc/ssh/sshd_config
-      - ./interfaces:/etc/network/interfaces
-      - ./users:/appdata/users
+      - ./container-data/sshd_config:/etc/ssh/sshd_config
+      - ./container-data/interfaces:/etc/network/interfaces
+      - ./container-data/users:/appdata/users
+      - ./container-data/pub-keys:/appdata/pub-keys
+      - ./container-data/host-keys:/appdata/host-keys
     networks:
       net_ssh_vpn:
         ipv4_address: 10.253.9.2

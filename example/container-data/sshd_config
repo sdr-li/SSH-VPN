@@ -11,6 +11,7 @@ X11Forwarding yes
 Subsystem       sftp    internal-sftp
 PermitTunnel yes
 LogLevel VERBOSE
+PasswordAuthentication no
 
 Match Group vpn-users
 	ForceCommand /bin/false
