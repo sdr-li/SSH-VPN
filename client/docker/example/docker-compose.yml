@@ -2,8 +2,10 @@
 version: '3'
 
 services:
-  vpn_mgmt_dns:
+  ssh_vpn_client:
     image: ssh-vpn-client:v3
+    stdin_open: true # docker run -i
+    tty: true
     container_name: ssh-vpn-client
     restart: always
     #ports:
@@ -11,20 +13,29 @@ services:
       #- '60201:53/udp'
     environment:
       - ROOTPASS=shithappens
+      - SERVER_IP=10.253.9.2
+      - LOCAL_TUN_IP=10.242.10.2/30
+      - LOCAL_TUN_IF=101
+      - REMOTE_TUN_IF=101
+      - USERNAME=example_user_0
+      - KEY_PATH=/appdata/key
     volumes:
-      - ./container-data/ssh-tunnel:/etc/init.d/ssh-tunnel
+      - ./container-data/ssh-tunnel.sh:/appdata/ssh-tunnel.sh
       - ./container-data/key:/appdata/key
     networks:
       net_ssh_vpn:
-        ipv4_address: 10.253.9.2
+        ipv4_address: 10.253.9.3
     cap_add:
       - NET_ADMIN
 
+# networks:
+#   net_ssh_vpn_client:
+#     enable_ipv6: false
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 10.253.8.0/30
+
 networks:
   net_ssh_vpn:
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.253.8.0/29
-
+    driver: bridge

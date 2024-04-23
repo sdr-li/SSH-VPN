@@ -7,4 +7,4 @@ chmod 666 /dev/net/tun
 echo 'root':$ROOTPASS | chpasswd
 #cp /appdata/ssh-tunnel /etc/init.d/ssh-tunnel
 #rc-service ssh-tunnel start
-/bin/sh
+/appdata/ssh-tunnel.sh

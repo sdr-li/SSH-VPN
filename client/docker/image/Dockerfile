@@ -10,5 +10,5 @@ RUN rc-status
 RUN rc-update add sshd
 COPY entrypoint.sh /appdata
 
-#ENTRYPOINT /appdata/entrypoint.sh && /bin/sh
-ENTRYPOINT /bin/sh
+ENTRYPOINT /appdata/entrypoint.sh && /bin/sh
+

@@ -2,9 +2,9 @@
 version: '3'
 
 services:
-  vpn_mgmt_dns:
+  ssh_vpn_server:
     image: ssh-vpn:v3
-    container_name: ssh-vpn
+    container_name: ssh-vpn-server
     restart: always
     #ports:
     #  - 5380:8080
