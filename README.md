@@ -11,18 +11,17 @@ For the project, there are also attached client scripts, as well as docker image
 
 In the SSH-VPN container, one OpenSSH server is run. When container starts, all users defined in "users" file, are created. Besides them, also corresponding interface for each user is created, as well as provided IP addresses are set to them. Static IP routes setup ability coming soon.
 
-### How to run it?
+### How to run server?
 
-
-- build project, using attached **build.sh**
+- build project, using attached *server/scripts/build.sh*
 
 Then do proper configuration:
-- run **generate_ssh_key_user.sh** inside the *example/scripts* to create public/private SSH key pair for each user
-- run **generate_ssh_key_host.sh** inside the *example/scripts* to create host keys for SSH server
-- run **docker-compose up** inside the *example* directory
+- run *server/scripts/generate_ssh_key_user.sh* inside the *server/example/scripts* to create public/private SSH key pair for each user
+- run *server/scripts/generate_ssh_key_host.sh* inside the *server/example/scripts* to create host keys for SSH server
+- run **docker-compose up** inside the *server/example* directory
 
-in file **users**, You can define username, password, interface name(without prefix tun), and IP address(of gateway) per each interface.
-Following example defines 4 users, with their passwords. For each user, very small subnet was created. Defined IP is associated with interface on server side - with gateway - so in this scenario client should use the next one.
+in file *users*, You can define username, password, interface name(without prefix tun), and IP address(of gateway) per each interface.
+Following example defines 4 users, with their passwords. For each user, very small subnet was created. Defined IP is associated with interface on server side - with gateway - so in this scenario client should use the next IP address(and as for /30, the last usable one).
 Password login is disabled by default for increased security, It can be enabled with ``` PasswordAuthentication yes ``` defined inside **sshd_config** file.
 
 ```
@@ -33,15 +32,42 @@ example_user_3:example_pass_0:104:10.242.10.13/30
 ```
 If client would like to connect with the other IP's than the gateway, according static IP routing should be set on client side as well as on server side.
 
-#### How to connect?
 
+##### With attached docker example
+
+
+### How to connect?
+
+#### From Your desktop linux OS
 Assuming that we want to use **example_user_0** configuration - run following on the client:
 - create tun interface associated with Your username ``` sudo ip tuntap add mode tun user yourusernameonclientmachine name tun24 ```
 - assign proper IP address to the interface ``` sudo ip addr add 10.242.10.2/30 dev tun24 ```
 - bring up newly created interface ``` sudo ip link set tun24 up ```
-- create tunnel connection with the server - connect with ssh server - ``` ssh -i example/keys/example_user_0 example_user_0@ipofsshvpnserver -w24:101 ``` then provide password. Be aware, that for VPN users(vpn-users group), executing commands over SSH is not available, and was intentionally blocked with ``` ForceCommand /bin/false ``` inside **sshd_config** file
+- create tunnel connection with the server - connect with ssh server - ``` ssh -i server/example/keys/example_user_0 example_user_0@ipofsshvpnserver -w24:101 ``` then provide password. Be aware, that for VPN users(vpn-users group), executing commands over SSH is not available, and was intentionally blocked with ``` ForceCommand /bin/false ``` inside **sshd_config** file
 
-Private
+#### Using docker example
+
+##### Use-case
+You could use this client, if You had docker-compose project with many different containers, which share the same docker-created-network, and You had a need to get an access to this network. In that scenario, the ssh-vpn-client plays a role of gateway, that allows the other parties, that also have an access to the VPN(other clients), to access inter-container-network.
+
+##### Configuration
+You basically need to provide working private key to file *client/docker/example/container-data/key* (as an example, example_user_0 key was provided).
+Besides that, some environmentals should be set inside docker-compose file
+```
+environment:
+    - ROOTPASS=shithappens
+    - SERVER_IP=10.253.9.2
+    - LOCAL_TUN_IP=10.242.10.2/30
+    - LOCAL_TUN_IF=101
+    - REMOTE_TUN_IF=101
+    - USERNAME=example_user_0
+    - KEY_PATH=/appdata/key
+```
+
+##### Run it...
+... using docker-compose up
+
+
 ### TODO
 
 - firewall (Awall)
