@@ -38,6 +38,12 @@ If client would like to connect with the other IP's than the gateway, according 
 
 ### How to connect?
 
+there are many ways how You could establish VPN connection:
+- scripts(quick and temporary connection from Your desktop)
+- systemd configuration (to permanently connect VM to VPN gateway)
+- docker - alpine based image (to permanently connect docker-network to VPN gateway)
+
+
 #### From Your desktop linux OS
 Assuming that we want to use **example_user_0** configuration - run following on the client:
 - create tun interface associated with Your username ``` sudo ip tuntap add mode tun user yourusernameonclientmachine name tun24 ```
