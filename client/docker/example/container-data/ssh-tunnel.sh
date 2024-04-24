@@ -1,6 +1,5 @@
 #!/bin/sh
 set -x
-x = 1
 # NEED TO DEFINE THOSE IN DOCKER-COMPOSE
 #SERVER_IP="10.253.9.2"
 #LOCAL_TUN_IP="10.242.10.2/30"
@@ -20,3 +19,4 @@ do
   echo "Connection failed or closed! trying again in 10 seconds"
   sleep 10
 done
+

@@ -1,0 +1,15 @@
+[Unit]
+Description=SSH VPN Client
+After=network.target
+
+[Service]
+ExecStartPre=/root/ssh-tunnel/pre-up.sh
+User=root
+EnvironmentFile=/root/ssh-tunnel/command.conf
+ExecStart=ssh $DAEMON_OPTS
+KillMode=process
+Restart=always
+RestartSec=15s
+
+[Install]
+WantedBy=multi-user.target
