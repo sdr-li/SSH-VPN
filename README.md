@@ -38,7 +38,7 @@ If client would like to connect with the other IP's than the gateway, according 
 
 ### How to connect?
 
-there are many ways how You could establish VPN connection:
+there are numerous ways to establish VPN connection. In this project, there are 3 different examples:
 - scripts(quick and temporary connection from Your desktop)
 - systemd configuration (to permanently connect VM to VPN gateway)
 - docker - alpine based image (to permanently connect docker-network to VPN gateway)
@@ -50,6 +50,8 @@ Assuming that we want to use **example_user_0** configuration - run following on
 - assign proper IP address to the interface ``` sudo ip addr add 10.242.10.2/30 dev tun24 ```
 - bring up newly created interface ``` sudo ip link set tun24 up ```
 - create tunnel connection with the server - connect with ssh server - ``` ssh -i server/example/keys/example_user_0 example_user_0@ipofsshvpnserver -w24:101 ``` then provide password. Be aware, that for VPN users(vpn-users group), executing commands over SSH is not available, and was intentionally blocked with ``` ForceCommand /bin/false ``` inside **sshd_config** file
+
+Or instead of doing that, You can just run a scripts from *client/connection-script* in correct order...
 
 #### Using docker example
 
@@ -85,12 +87,17 @@ Run *./install.sh* inside it's directory.
 
 ### TODO
 
+#### Server
 - firewall (Awall)
 - DNS server
 - ~~support for SSH keys(password-less login)~~ DONE!
 - better way to add static ip routing
 - wrapping everything in Webproc
 - updating setup without breaking SSH sessions
+
+#### Client
+- no idea yet:)
+
 
 ### Disclaimer
 

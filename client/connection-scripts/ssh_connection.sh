@@ -4,7 +4,7 @@ SERVER_IP="10.253.9.2"
 LOCAL_TUN_IF="101"
 REMOTE_TUN_IF="101"
 USERNAME="example_user_0"
-KEY_PATH="/appdata/key"
+KEY_PATH="key"
 
 while 1
 do
