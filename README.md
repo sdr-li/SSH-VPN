@@ -67,6 +67,15 @@ environment:
 ##### Run it...
 ... using docker-compose up
 
+#### Using systemd
+
+You can also put *client/systemd-script* files onto VM(when logged as a root), configure variables from *install.sh*, and execute this file - while being on VM. This will create a ssh connection that will start on boot, and in case of ssh connection(tunnel) breaks, gets restored(```  Restart=always ``` and ``` RestartSec=15s ``` in systemd file).
+
+##### Configuration
+Edit *install.sh* environmental variables.
+
+##### Install
+Run *./install.sh* inside it's directory.
 
 ### TODO
 
