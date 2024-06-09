@@ -6,7 +6,7 @@ REMOTE_TUN_IF="101"
 USERNAME="example_user_0"
 KEY_PATH="key"
 
-while 1
+while :
 do
   ssh -i $KEY_PATH $USERNAME@$SERVER_IP -w $LOCAL_TUN_IF:$REMOTE_TUN_IF
   echo "Connection closed! trying again in 10 seconds"

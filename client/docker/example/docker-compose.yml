@@ -22,6 +22,7 @@ services:
     volumes:
       - ./container-data/ssh-tunnel.sh:/appdata/ssh-tunnel.sh
       - ./container-data/key:/appdata/key
+      - ./container-data/master-ssh-key.pub:/appdata/master-ssh-key.pub
     networks:
       net_ssh_vpn:
         ipv4_address: 10.253.9.3

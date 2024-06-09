@@ -8,6 +8,7 @@ if test -f /appdata/pub-keys/root.pub; then
 fi
 cp /appdata/host-keys/* /etc/ssh/
 
+VPNGROUPID=$(vpn-users)
 
 input="./users"
 while IFS= read -r line
@@ -25,7 +26,8 @@ do
     if test -f /appdata/pub-keys/$USER.pub; then
         cp /appdata/pub-keys/$USER.pub /home/$USER/.ssh/authorized_keys
     fi
-
+    USERID=$(id -u $USER)
+    chown -R $USERID:vpn-users /home/$USER
     ip tuntap add mode tun user $USER name "tun"$TUN_ID
     ip addr add $IP dev "tun"$TUN_ID
     ip link set "tun"$TUN_ID up
