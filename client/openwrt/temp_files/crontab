@@ -1,0 +1,1 @@
+*/10 * * * * /root/ssh_vpn_tun101/check-if-vpn-ok.sh

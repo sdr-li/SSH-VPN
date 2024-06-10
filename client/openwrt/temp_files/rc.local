@@ -1,0 +1,4 @@
+sleep 15
+/root/ssh_vpn_tun101/create_if.sh
+/root/ssh_vpn_tun101/check-if-vpn-ok.sh
+exit 0

@@ -1,0 +1,13 @@
+#!/bin/sh /etc/rc.common
+USE_PROCD=1
+START=99
+
+START_DEPENDENCIES="network"
+
+start_service() {
+         procd_open_instance ssh_vpn_<VPN_NAME>
+         procd_set_param command ssh
+         procd_append_param command -i /root/ssh_vpn_<VPN_NAME>/key <VPN_SSH_USERNAME>@<SSH_SERVER_IP> -p <SSH_SERVER_PORT> -w <VPN_LOCAL_IF>:<VPN_REMOTE_IF>
+         procd_close_instance
+         procd_set_param respawn ${respawn_threshold:-3600} ${respawn_timeout:-5} ${respawn_retry:-5}
+}
