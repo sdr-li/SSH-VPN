@@ -102,3 +102,4 @@ Run *./install.sh* inside it's directory.
 ### Disclaimer
 
 Have fun, and do not use this solution where it is expicitly forbidden!
+Remove SSH keys. Nope, they are not used anywhere:).

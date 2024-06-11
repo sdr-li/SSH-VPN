@@ -10,3 +10,7 @@ cat server-host-ssh/ssh_host_ed25519_key.pub
 cp server-host-ssh/ssh_host_rsa_key* ../server/example/container-data/host-keys/
 cp server-host-ssh/ssh_host_ecdsa_key* ../server/example/container-data/host-keys/
 cp server-host-ssh/ssh_host_ed25519_key* ../server/example/container-data/host-keys/
+
+cp server-host-ssh/ssh_host_rsa_key.pub ../client/openwrt/ssh_host_rsa_key.pub
+cp server-host-ssh/ssh_host_ecdsa_key.pub ../client/openwrt/ssh_host_ecdsa_key.pub
+cp server-host-ssh/ssh_host_ed25519_key.pub ../client/openwrt/ssh_host_ed25519_key.pub

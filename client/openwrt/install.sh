@@ -33,6 +33,12 @@ echo "/root/ssh_vpn_$VPN_NAME/create_if.sh" >> temp_files/rc.local
 echo "/root/ssh_vpn_$VPN_NAME/check-if-vpn-ok.sh" >> temp_files/rc.local
 echo "exit 0" >> temp_files/rc.local
 
+touch /root/.ssh/known_hosts
+cp /root/.ssh/known_hosts temp_files/known_hosts
+echo "[$SSH_SERVER_IP]:$SSH_SERVER_PORT $(cat ssh_host_rsa_key.pub)" >> temp_files/known_hosts
+echo "[$SSH_SERVER_IP]:$SSH_SERVER_PORT $(cat ssh_host_ed25519_key.pub)" >> temp_files/known_hosts
+echo "[$SSH_SERVER_IP]:$SSH_SERVER_PORT $(cat ssh_host_ecdsa_key.pub)" >> temp_files/known_hosts
+
 echo "Check if every file was generated ok! if so, type INSTALL"
 read input_text
 if [ "$input_text" = "INSTALL" ]; then
@@ -44,5 +50,6 @@ if [ "$input_text" = "INSTALL" ]; then
     cp temp_files/create_if.sh /root/ssh_vpn_$VPN_NAME/create_if.sh
     cp temp_files/check-if-vpn-ok.sh /root/ssh_vpn_$VPN_NAME/check-if-vpn-ok.sh
     cp key /root/ssh_vpn_$VPN_NAME/key
+    cp temp_files/known_hosts /root/.ssh/known_hosts
 fi
 
